@@ -24,6 +24,10 @@ bot.onText(/\/chat/, (msg) => {
 bot.on('message', function (msg) {
     var chatId = msg.chat.id;
     if (msg.contact) {
+        console.log((msg.contact.phone_number[0]))
+        if(msg.contact.phone_number[0]!=="+"){
+            msg.contact.phone_number[0] = '+'+ msg.contact.phone_number[0]
+        }
         database.updateData('users/' + chatId, msg.contact);
         sendIdAsk(chatId)
     }
