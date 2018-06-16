@@ -1,0 +1,23 @@
+{
+  "name": "helpexcel_accounting_bot",
+  "version": "1.0.0",
+  "description": "best analytics bot",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "keywords": [
+    "analytics",
+    "bot"
+  ],
+  "author": "chlenc",
+  "license": "ISC",
+  "dependencies": {
+    "es6": "0.0.7",
+    "firebase": "^5.0.4",
+    "firebase-admin": "^5.12.1",
+    "memory-cache": "^0.2.0",
+    "node-telegram-bot-api": "^0.30.0",
+    "nodemon": "^1.17.5"
+  }
+}
