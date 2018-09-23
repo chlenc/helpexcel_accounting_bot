@@ -12,7 +12,17 @@ const bot = new TelegramBot(token, {polling: true});
 
 
 bot.onText(/\/start/, (msg) => {
-    bot.sendMessage(msg.chat.id, frases.phone, keyboards.phone)
+
+    var chatId = msg.chat.id;
+    database.getData('users/' + chatId).then(user => {
+        if (user  && user.phone_number) {
+            console.log(user)
+            sendIdAsk(chatId)
+        }else {
+            bot.sendMessage(chatId, frases.phone, keyboards.phone);
+        }
+    })
+
 });
 bot.onText(/\/help/, (msg) => {
     bot.sendMessage(msg.chat.id, frases.help)
@@ -24,10 +34,9 @@ bot.onText(/\/chat/, (msg) => {
 bot.on('message', function (msg) {
     var chatId = msg.chat.id;
     if (msg.contact) {
-        if(msg.contact.phone_number[0]!=="+"){
-            msg.contact.phone_number = '+'+ msg.contact.phone_number
+        if (msg.contact.phone_number[0] !== "+") {
+            msg.contact.phone_number = '+' + msg.contact.phone_number
         }
-        console.log()
         database.updateData('users/' + chatId, msg.contact);
         sendIdAsk(chatId)
     }
@@ -147,11 +156,11 @@ bot.on('callback_query', function (query) {
             database.getData('users/' + chat.id).then(user => {
                 var date = new Date();
                 bot.sendMessage('-309140108', `${date.getHours()}:${date.getMinutes()}  ` +
-                    `${('0' + date.getDate()).slice(-2)}.${('0' + (date.getMonth() + 1)).slice(-2)}.${date.getFullYear()} \n`+
-                    `Обратная связь:\n${frases.user_link(chat.id,chat.first_name)} - ${user.phone_number}`
+                    `${('0' + date.getDate()).slice(-2)}.${('0' + (date.getMonth() + 1)).slice(-2)}.${date.getFullYear()} \n` +
+                    `Обратная связь:\n${frases.user_link(chat.id, chat.first_name)} - ${user.phone_number}`
                     , {parse_mode: "HTML"})
                 bot.sendMessage(chat.id, 'C вами свяжутся ✅')
-                bot.deleteMessage(chat.id,message_id)
+                bot.deleteMessage(chat.id, message_id)
             })
             break;
     }
