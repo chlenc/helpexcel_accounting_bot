@@ -19,5 +19,9 @@
     "memory-cache": "^0.2.0",
     "node-telegram-bot-api": "^0.30.0",
     "nodemon": "^1.17.5"
+  },
+  "engines": {
+    "node": "8.9.3",
+    "npm": "6.1.0"
   }
 }
