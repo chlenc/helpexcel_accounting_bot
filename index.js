@@ -16,7 +16,6 @@ bot.onText(/\/start/, (msg) => {
     var chatId = msg.chat.id;
     database.getData('users/' + chatId).then(user => {
         if (user  && user.phone_number) {
-            console.log(user)
             sendIdAsk(chatId)
         }else {
             bot.sendMessage(chatId, frases.phone, keyboards.phone);
