@@ -7,13 +7,8 @@
     "start": "node index.js"
   },
   "engines": {
-    "node": "8.9.3",
-    "npm": "6.1.0"
+    "node": "8.9.3"
   },
-  "keywords": [
-    "analytics",
-    "bot"
-  ],
   "author": "chlenc",
   "license": "ISC",
   "dependencies": {
